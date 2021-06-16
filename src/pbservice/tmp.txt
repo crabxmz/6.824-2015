@@ -1,0 +1,298 @@
+2021/06/16 08:43:28 server.go:292: rpc.Register: method "GetRPCCount" has 1 input parameters; needs exactly three
+2021/06/16 08:43:28 server.go:292: rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+Test: Repeated failures/restarts ...
+2021/06/16 08:43:29 server.go:48: Primary inited: /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:29 server.go:233: new server start, p is /var/tmp/824-501/pb-60069-rc-1 and b is 
+2021/06/16 08:43:29 server.go:292: rpc.Register: method "CallRetry" has 6 input parameters; needs exactly three
+2021/06/16 08:43:29 server.go:292: rpc.Register: method "CheckDup" has 2 input parameters; needs exactly three
+2021/06/16 08:43:29 server.go:292: rpc.Register: method "CommitKV" has 2 input parameters; needs exactly three
+2021/06/16 08:43:29 server.go:329: rpc.Register: return type of method "Redirect" is "pbservice.Err", must be error
+2021/06/16 08:43:29 server.go:292: rpc.Register: method "SyncKVFromPrimary" has 2 input parameters; needs exactly three
+2021/06/16 08:43:29 server.go:292: rpc.Register: method "SyncReqFromPrimary" has 2 input parameters; needs exactly three
+2021/06/16 08:43:29 server.go:292: rpc.Register: method "UpdateView" has 1 input parameters; needs exactly three
+2021/06/16 08:43:29 server.go:60: Backup inited: /var/tmp/824-501/pb-60069-rc-2
+2021/06/16 08:43:29 server.go:376: server /var/tmp/824-501/pb-60069-rc-1 update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-2|
+2021/06/16 08:43:29 server.go:233: new server start, p is /var/tmp/824-501/pb-60069-rc-1 and b is /var/tmp/824-501/pb-60069-rc-2
+2021/06/16 08:43:29 server.go:292: rpc.Register: method "CallRetry" has 6 input parameters; needs exactly three
+2021/06/16 08:43:29 server.go:292: rpc.Register: method "CheckDup" has 2 input parameters; needs exactly three
+2021/06/16 08:43:29 server.go:292: rpc.Register: method "CommitKV" has 2 input parameters; needs exactly three
+2021/06/16 08:43:29 server.go:329: rpc.Register: return type of method "Redirect" is "pbservice.Err", must be error
+2021/06/16 08:43:29 server.go:292: rpc.Register: method "SyncKVFromPrimary" has 2 input parameters; needs exactly three
+2021/06/16 08:43:29 server.go:292: rpc.Register: method "SyncReqFromPrimary" has 2 input parameters; needs exactly three
+2021/06/16 08:43:29 server.go:292: rpc.Register: method "UpdateView" has 1 input parameters; needs exactly three
+2021/06/16 08:43:29 server.go:77: ping from 3rd client: /var/tmp/824-501/pb-60069-rc-3
+2021/06/16 08:43:29 server.go:79: New volunteer: /var/tmp/824-501/pb-60069-rc-3
+2021/06/16 08:43:29 server.go:233: new server start, p is /var/tmp/824-501/pb-60069-rc-1 and b is /var/tmp/824-501/pb-60069-rc-2
+2021/06/16 08:43:29 server.go:292: rpc.Register: method "CallRetry" has 6 input parameters; needs exactly three
+2021/06/16 08:43:29 server.go:292: rpc.Register: method "CheckDup" has 2 input parameters; needs exactly three
+2021/06/16 08:43:29 server.go:292: rpc.Register: method "CommitKV" has 2 input parameters; needs exactly three
+2021/06/16 08:43:29 server.go:329: rpc.Register: return type of method "Redirect" is "pbservice.Err", must be error
+2021/06/16 08:43:29 server.go:292: rpc.Register: method "SyncKVFromPrimary" has 2 input parameters; needs exactly three
+2021/06/16 08:43:29 server.go:292: rpc.Register: method "SyncReqFromPrimary" has 2 input parameters; needs exactly three
+2021/06/16 08:43:29 server.go:292: rpc.Register: method "UpdateView" has 1 input parameters; needs exactly three
+2021/06/16 08:43:29 client.go:43: New clerk init, view service: /var/tmp/824-501/pb-60069-rcv-1
+2021/06/16 08:43:29 client.go:43: New clerk init, view service: /var/tmp/824-501/pb-60069-rcv-1
+2021/06/16 08:43:29 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-2|
+2021/06/16 08:43:29 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-2|
+2021/06/16 08:43:29 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:1000009, Value:8381559534870320639
+2021/06/16 08:43:29 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:29 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:7, Value:4808178277023415007
+2021/06/16 08:43:29 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:29 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:1000009, Value:8381559534870320639
+2021/06/16 08:43:29 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:29 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:7, Value:4808178277023415007
+2021/06/16 08:43:29 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:29 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:7, Value:4808178277023415007
+2021/06/16 08:43:29 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:29 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:1000009, Value:8381559534870320639
+2021/06/16 08:43:29 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:30 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:7, Value:4808178277023415007
+2021/06/16 08:43:30 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:30 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:1000009, Value:8381559534870320639
+2021/06/16 08:43:30 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:30 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:1000009, Value:8381559534870320639
+2021/06/16 08:43:30 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:30 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:7, Value:4808178277023415007
+2021/06/16 08:43:30 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:30 server.go:171: Backup timeout on view 2, acked view 2
+2021/06/16 08:43:30 server.go:154: !@(*#&!@($volunteer->backup
+2021/06/16 08:43:30 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:7, Value:4808178277023415007
+2021/06/16 08:43:30 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:30 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-3|
+2021/06/16 08:43:30 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:1000009, Value:8381559534870320639
+2021/06/16 08:43:30 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:30 server.go:376: server /var/tmp/824-501/pb-60069-rc-1 update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-3|
+2021/06/16 08:43:30 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-3|
+2021/06/16 08:43:30 server.go:376: server /var/tmp/824-501/pb-60069-rc-3 update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-3|
+2021/06/16 08:43:30 server.go:77: ping from 3rd client: /var/tmp/824-501/pb-60069-rc-2
+2021/06/16 08:43:30 server.go:79: New volunteer: /var/tmp/824-501/pb-60069-rc-2
+2021/06/16 08:43:30 server.go:233: new server start, p is /var/tmp/824-501/pb-60069-rc-1 and b is /var/tmp/824-501/pb-60069-rc-3
+2021/06/16 08:43:30 server.go:292: rpc.Register: method "CallRetry" has 6 input parameters; needs exactly three
+2021/06/16 08:43:30 server.go:292: rpc.Register: method "CheckDup" has 2 input parameters; needs exactly three
+2021/06/16 08:43:30 server.go:292: rpc.Register: method "CommitKV" has 2 input parameters; needs exactly three
+2021/06/16 08:43:30 server.go:329: rpc.Register: return type of method "Redirect" is "pbservice.Err", must be error
+2021/06/16 08:43:30 server.go:292: rpc.Register: method "SyncKVFromPrimary" has 2 input parameters; needs exactly three
+2021/06/16 08:43:30 server.go:292: rpc.Register: method "SyncReqFromPrimary" has 2 input parameters; needs exactly three
+2021/06/16 08:43:30 server.go:292: rpc.Register: method "UpdateView" has 1 input parameters; needs exactly three
+2021/06/16 08:43:31 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:6, Value:1089824774738117141
+2021/06/16 08:43:31 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:31 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:1000002, Value:7566306228157770385
+2021/06/16 08:43:31 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:31 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:6, Value:1089824774738117141
+2021/06/16 08:43:31 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:31 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:1000002, Value:7566306228157770385
+2021/06/16 08:43:31 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:31 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:6, Value:1089824774738117141
+2021/06/16 08:43:31 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:31 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:1000002, Value:7566306228157770385
+2021/06/16 08:43:31 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:32 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:1000002, Value:7566306228157770385
+2021/06/16 08:43:32 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:32 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:6, Value:1089824774738117141
+2021/06/16 08:43:32 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:32 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:1000002, Value:7566306228157770385
+2021/06/16 08:43:32 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:32 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:6, Value:1089824774738117141
+2021/06/16 08:43:32 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:32 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:1000002, Value:7566306228157770385
+2021/06/16 08:43:32 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:32 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:6, Value:1089824774738117141
+2021/06/16 08:43:32 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:32 server.go:171: Backup timeout on view 3, acked view 3
+2021/06/16 08:43:32 server.go:154: !@(*#&!@($volunteer->backup
+2021/06/16 08:43:32 server.go:376: server /var/tmp/824-501/pb-60069-rc-1 update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-2|
+2021/06/16 08:43:32 server.go:376: server /var/tmp/824-501/pb-60069-rc-2 update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-2|
+2021/06/16 08:43:32 server.go:77: ping from 3rd client: /var/tmp/824-501/pb-60069-rc-3
+2021/06/16 08:43:32 server.go:79: New volunteer: /var/tmp/824-501/pb-60069-rc-3
+2021/06/16 08:43:32 server.go:233: new server start, p is /var/tmp/824-501/pb-60069-rc-1 and b is /var/tmp/824-501/pb-60069-rc-2
+2021/06/16 08:43:32 server.go:292: rpc.Register: method "CallRetry" has 6 input parameters; needs exactly three
+2021/06/16 08:43:32 server.go:292: rpc.Register: method "CheckDup" has 2 input parameters; needs exactly three
+2021/06/16 08:43:32 server.go:292: rpc.Register: method "CommitKV" has 2 input parameters; needs exactly three
+2021/06/16 08:43:32 server.go:329: rpc.Register: return type of method "Redirect" is "pbservice.Err", must be error
+2021/06/16 08:43:32 server.go:292: rpc.Register: method "SyncKVFromPrimary" has 2 input parameters; needs exactly three
+2021/06/16 08:43:32 server.go:292: rpc.Register: method "SyncReqFromPrimary" has 2 input parameters; needs exactly three
+2021/06/16 08:43:32 server.go:292: rpc.Register: method "UpdateView" has 1 input parameters; needs exactly three
+2021/06/16 08:43:33 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-2|
+2021/06/16 08:43:33 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-2|
+2021/06/16 08:43:34 server.go:167: Primary timeout on view 4, acked view 4
+2021/06/16 08:43:34 server.go:376: server /var/tmp/824-501/pb-60069-rc-2 update view, now p is |/var/tmp/824-501/pb-60069-rc-2|,b is ||
+2021/06/16 08:43:34 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-2|,b is ||
+2021/06/16 08:43:34 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-2|,b is ||
+2021/06/16 08:43:34 server.go:376: server /var/tmp/824-501/pb-60069-rc-3 update view, now p is |/var/tmp/824-501/pb-60069-rc-2|,b is ||
+2021/06/16 08:43:34 server.go:60: Backup inited: /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:34 server.go:376: server /var/tmp/824-501/pb-60069-rc-2 update view, now p is |/var/tmp/824-501/pb-60069-rc-2|,b is |/var/tmp/824-501/pb-60069-rc-1|
+2021/06/16 08:43:34 server.go:233: new server start, p is /var/tmp/824-501/pb-60069-rc-2 and b is /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:34 server.go:292: rpc.Register: method "CallRetry" has 6 input parameters; needs exactly three
+2021/06/16 08:43:34 server.go:292: rpc.Register: method "CheckDup" has 2 input parameters; needs exactly three
+2021/06/16 08:43:34 server.go:292: rpc.Register: method "CommitKV" has 2 input parameters; needs exactly three
+2021/06/16 08:43:34 server.go:329: rpc.Register: return type of method "Redirect" is "pbservice.Err", must be error
+2021/06/16 08:43:34 server.go:292: rpc.Register: method "SyncKVFromPrimary" has 2 input parameters; needs exactly three
+2021/06/16 08:43:34 server.go:292: rpc.Register: method "SyncReqFromPrimary" has 2 input parameters; needs exactly three
+2021/06/16 08:43:34 server.go:292: rpc.Register: method "UpdateView" has 1 input parameters; needs exactly three
+2021/06/16 08:43:34 server.go:376: server /var/tmp/824-501/pb-60069-rc-3 update view, now p is |/var/tmp/824-501/pb-60069-rc-2|,b is |/var/tmp/824-501/pb-60069-rc-1|
+2021/06/16 08:43:35 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-2|,b is |/var/tmp/824-501/pb-60069-rc-1|
+2021/06/16 08:43:35 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-2|,b is |/var/tmp/824-501/pb-60069-rc-1|
+2021/06/16 08:43:36 server.go:167: Primary timeout on view 6, acked view 6
+2021/06/16 08:43:36 server.go:376: server /var/tmp/824-501/pb-60069-rc-3 update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is ||
+2021/06/16 08:43:36 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is ||
+2021/06/16 08:43:36 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is ||
+2021/06/16 08:43:36 server.go:376: server /var/tmp/824-501/pb-60069-rc-1 update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is ||
+2021/06/16 08:43:36 server.go:60: Backup inited: /var/tmp/824-501/pb-60069-rc-2
+2021/06/16 08:43:36 server.go:376: server /var/tmp/824-501/pb-60069-rc-1 update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-2|
+2021/06/16 08:43:36 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:9, Value:2266266290784401656
+2021/06/16 08:43:36 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:36 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-2|
+2021/06/16 08:43:36 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:1000006, Value:3754114977726302736
+2021/06/16 08:43:36 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:36 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-2|
+2021/06/16 08:43:36 server.go:233: new server start, p is /var/tmp/824-501/pb-60069-rc-1 and b is /var/tmp/824-501/pb-60069-rc-2
+2021/06/16 08:43:36 server.go:292: rpc.Register: method "CallRetry" has 6 input parameters; needs exactly three
+2021/06/16 08:43:36 server.go:292: rpc.Register: method "CheckDup" has 2 input parameters; needs exactly three
+2021/06/16 08:43:36 server.go:292: rpc.Register: method "CommitKV" has 2 input parameters; needs exactly three
+2021/06/16 08:43:36 server.go:329: rpc.Register: return type of method "Redirect" is "pbservice.Err", must be error
+2021/06/16 08:43:36 server.go:292: rpc.Register: method "SyncKVFromPrimary" has 2 input parameters; needs exactly three
+2021/06/16 08:43:36 server.go:292: rpc.Register: method "SyncReqFromPrimary" has 2 input parameters; needs exactly three
+2021/06/16 08:43:36 server.go:292: rpc.Register: method "UpdateView" has 1 input parameters; needs exactly three
+2021/06/16 08:43:36 server.go:376: server /var/tmp/824-501/pb-60069-rc-3 update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-2|
+2021/06/16 08:43:37 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:1000001, Value:6323172860383634042
+2021/06/16 08:43:37 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:37 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:0, Value:4231053750055282277
+2021/06/16 08:43:37 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:37 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:1000001, Value:6323172860383634042
+2021/06/16 08:43:37 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:37 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:0, Value:4231053750055282277
+2021/06/16 08:43:37 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:37 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:1000001, Value:6323172860383634042
+2021/06/16 08:43:37 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:37 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:0, Value:4231053750055282277
+2021/06/16 08:43:37 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:38 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:0, Value:4231053750055282277
+2021/06/16 08:43:38 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:38 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:1000001, Value:6323172860383634042
+2021/06/16 08:43:38 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:38 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:1000001, Value:6323172860383634042
+2021/06/16 08:43:38 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:38 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:0, Value:4231053750055282277
+2021/06/16 08:43:38 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:38 server.go:171: Backup timeout on view 8, acked view 8
+2021/06/16 08:43:38 server.go:154: !@(*#&!@($volunteer->backup
+2021/06/16 08:43:38 server.go:376: server /var/tmp/824-501/pb-60069-rc-1 update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-3|
+2021/06/16 08:43:38 server.go:376: server /var/tmp/824-501/pb-60069-rc-3 update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-3|
+2021/06/16 08:43:38 server.go:77: ping from 3rd client: /var/tmp/824-501/pb-60069-rc-2
+2021/06/16 08:43:38 server.go:79: New volunteer: /var/tmp/824-501/pb-60069-rc-2
+2021/06/16 08:43:38 server.go:233: new server start, p is /var/tmp/824-501/pb-60069-rc-1 and b is /var/tmp/824-501/pb-60069-rc-3
+2021/06/16 08:43:38 server.go:292: rpc.Register: method "CallRetry" has 6 input parameters; needs exactly three
+2021/06/16 08:43:38 server.go:292: rpc.Register: method "CheckDup" has 2 input parameters; needs exactly three
+2021/06/16 08:43:38 server.go:292: rpc.Register: method "CommitKV" has 2 input parameters; needs exactly three
+2021/06/16 08:43:38 server.go:329: rpc.Register: return type of method "Redirect" is "pbservice.Err", must be error
+2021/06/16 08:43:38 server.go:292: rpc.Register: method "SyncKVFromPrimary" has 2 input parameters; needs exactly three
+2021/06/16 08:43:38 server.go:292: rpc.Register: method "SyncReqFromPrimary" has 2 input parameters; needs exactly three
+2021/06/16 08:43:38 server.go:292: rpc.Register: method "UpdateView" has 1 input parameters; needs exactly three
+2021/06/16 08:43:39 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-3|
+2021/06/16 08:43:39 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-3|
+2021/06/16 08:43:40 server.go:167: Primary timeout on view 9, acked view 9
+2021/06/16 08:43:40 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-3|,b is ||
+2021/06/16 08:43:40 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-3|,b is ||
+2021/06/16 08:43:40 server.go:376: server /var/tmp/824-501/pb-60069-rc-3 update view, now p is |/var/tmp/824-501/pb-60069-rc-3|,b is ||
+2021/06/16 08:43:40 server.go:376: server /var/tmp/824-501/pb-60069-rc-2 update view, now p is |/var/tmp/824-501/pb-60069-rc-3|,b is ||
+2021/06/16 08:43:40 server.go:60: Backup inited: /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:40 server.go:376: server /var/tmp/824-501/pb-60069-rc-3 update view, now p is |/var/tmp/824-501/pb-60069-rc-3|,b is |/var/tmp/824-501/pb-60069-rc-1|
+2021/06/16 08:43:40 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-3 error, Key:1000000, Value:3736263656206054718
+2021/06/16 08:43:40 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-3
+2021/06/16 08:43:40 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-3 error, Key:4, Value:2026855298408487190
+2021/06/16 08:43:40 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-3
+2021/06/16 08:43:40 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-3|,b is |/var/tmp/824-501/pb-60069-rc-1|
+2021/06/16 08:43:40 server.go:233: new server start, p is /var/tmp/824-501/pb-60069-rc-3 and b is /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:40 server.go:292: rpc.Register: method "CallRetry" has 6 input parameters; needs exactly three
+2021/06/16 08:43:40 server.go:292: rpc.Register: method "CheckDup" has 2 input parameters; needs exactly three
+2021/06/16 08:43:40 server.go:292: rpc.Register: method "CommitKV" has 2 input parameters; needs exactly three
+2021/06/16 08:43:40 server.go:329: rpc.Register: return type of method "Redirect" is "pbservice.Err", must be error
+2021/06/16 08:43:40 server.go:292: rpc.Register: method "SyncKVFromPrimary" has 2 input parameters; needs exactly three
+2021/06/16 08:43:40 server.go:292: rpc.Register: method "SyncReqFromPrimary" has 2 input parameters; needs exactly three
+2021/06/16 08:43:40 server.go:292: rpc.Register: method "UpdateView" has 1 input parameters; needs exactly three
+2021/06/16 08:43:40 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-3|,b is |/var/tmp/824-501/pb-60069-rc-1|
+2021/06/16 08:43:40 server.go:376: server /var/tmp/824-501/pb-60069-rc-2 update view, now p is |/var/tmp/824-501/pb-60069-rc-3|,b is |/var/tmp/824-501/pb-60069-rc-1|
+2021/06/16 08:43:42 server.go:179: volunteer server /var/tmp/824-501/pb-60069-rc-2 timeout, remove it
+2021/06/16 08:43:42 server.go:77: ping from 3rd client: /var/tmp/824-501/pb-60069-rc-2
+2021/06/16 08:43:42 server.go:79: New volunteer: /var/tmp/824-501/pb-60069-rc-2
+2021/06/16 08:43:42 server.go:233: new server start, p is /var/tmp/824-501/pb-60069-rc-3 and b is /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:42 server.go:292: rpc.Register: method "CallRetry" has 6 input parameters; needs exactly three
+2021/06/16 08:43:42 server.go:292: rpc.Register: method "CheckDup" has 2 input parameters; needs exactly three
+2021/06/16 08:43:42 server.go:292: rpc.Register: method "CommitKV" has 2 input parameters; needs exactly three
+2021/06/16 08:43:42 server.go:329: rpc.Register: return type of method "Redirect" is "pbservice.Err", must be error
+2021/06/16 08:43:42 server.go:292: rpc.Register: method "SyncKVFromPrimary" has 2 input parameters; needs exactly three
+2021/06/16 08:43:42 server.go:292: rpc.Register: method "SyncReqFromPrimary" has 2 input parameters; needs exactly three
+2021/06/16 08:43:42 server.go:292: rpc.Register: method "UpdateView" has 1 input parameters; needs exactly three
+2021/06/16 08:43:44 server.go:167: Primary timeout on view 11, acked view 11
+2021/06/16 08:43:44 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is ||
+2021/06/16 08:43:44 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is ||
+2021/06/16 08:43:44 server.go:376: server /var/tmp/824-501/pb-60069-rc-2 update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is ||
+2021/06/16 08:43:44 server.go:376: server /var/tmp/824-501/pb-60069-rc-1 update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is ||
+2021/06/16 08:43:44 server.go:60: Backup inited: /var/tmp/824-501/pb-60069-rc-3
+2021/06/16 08:43:44 server.go:376: server /var/tmp/824-501/pb-60069-rc-1 update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-3|
+2021/06/16 08:43:44 server.go:233: new server start, p is /var/tmp/824-501/pb-60069-rc-1 and b is /var/tmp/824-501/pb-60069-rc-3
+2021/06/16 08:43:44 server.go:292: rpc.Register: method "CallRetry" has 6 input parameters; needs exactly three
+2021/06/16 08:43:44 server.go:292: rpc.Register: method "CheckDup" has 2 input parameters; needs exactly three
+2021/06/16 08:43:44 server.go:292: rpc.Register: method "CommitKV" has 2 input parameters; needs exactly three
+2021/06/16 08:43:44 server.go:329: rpc.Register: return type of method "Redirect" is "pbservice.Err", must be error
+2021/06/16 08:43:44 server.go:292: rpc.Register: method "SyncKVFromPrimary" has 2 input parameters; needs exactly three
+2021/06/16 08:43:44 server.go:292: rpc.Register: method "SyncReqFromPrimary" has 2 input parameters; needs exactly three
+2021/06/16 08:43:44 server.go:292: rpc.Register: method "UpdateView" has 1 input parameters; needs exactly three
+2021/06/16 08:43:44 server.go:376: server /var/tmp/824-501/pb-60069-rc-2 update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-3|
+2021/06/16 08:43:45 client.go:137: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 failed, Key:6, Value:530818888630582779
+2021/06/16 08:43:45 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-3|
+2021/06/16 08:43:45 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-3|
+2021/06/16 08:43:45 client.go:137: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 failed, Key:6, Value:530818888630582779
+2021/06/16 08:43:45 client.go:137: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 failed, Key:6, Value:530818888630582779
+2021/06/16 08:43:46 client.go:137: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 failed, Key:6, Value:530818888630582779
+2021/06/16 08:43:46 client.go:137: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 failed, Key:6, Value:530818888630582779
+2021/06/16 08:43:46 server.go:167: Primary timeout on view 13, acked view 13
+2021/06/16 08:43:46 client.go:137: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 failed, Key:6, Value:530818888630582779
+2021/06/16 08:43:46 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-3|,b is ||
+2021/06/16 08:43:46 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-3|,b is ||
+2021/06/16 08:43:46 server.go:376: server /var/tmp/824-501/pb-60069-rc-3 update view, now p is |/var/tmp/824-501/pb-60069-rc-3|,b is ||
+2021/06/16 08:43:46 server.go:376: server /var/tmp/824-501/pb-60069-rc-2 update view, now p is |/var/tmp/824-501/pb-60069-rc-3|,b is ||
+2021/06/16 08:43:46 server.go:60: Backup inited: /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:46 server.go:376: server /var/tmp/824-501/pb-60069-rc-3 update view, now p is |/var/tmp/824-501/pb-60069-rc-3|,b is |/var/tmp/824-501/pb-60069-rc-1|
+2021/06/16 08:43:46 server.go:233: new server start, p is /var/tmp/824-501/pb-60069-rc-3 and b is /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:46 server.go:292: rpc.Register: method "CallRetry" has 6 input parameters; needs exactly three
+2021/06/16 08:43:46 server.go:292: rpc.Register: method "CheckDup" has 2 input parameters; needs exactly three
+2021/06/16 08:43:46 server.go:292: rpc.Register: method "CommitKV" has 2 input parameters; needs exactly three
+2021/06/16 08:43:46 server.go:329: rpc.Register: return type of method "Redirect" is "pbservice.Err", must be error
+2021/06/16 08:43:46 server.go:292: rpc.Register: method "SyncKVFromPrimary" has 2 input parameters; needs exactly three
+2021/06/16 08:43:46 server.go:292: rpc.Register: method "SyncReqFromPrimary" has 2 input parameters; needs exactly three
+2021/06/16 08:43:46 server.go:292: rpc.Register: method "UpdateView" has 1 input parameters; needs exactly three
+2021/06/16 08:43:46 server.go:376: server /var/tmp/824-501/pb-60069-rc-2 update view, now p is |/var/tmp/824-501/pb-60069-rc-3|,b is |/var/tmp/824-501/pb-60069-rc-1|
+2021/06/16 08:43:47 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-3|,b is |/var/tmp/824-501/pb-60069-rc-1|
+2021/06/16 08:43:47 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-3|,b is |/var/tmp/824-501/pb-60069-rc-1|
+2021/06/16 08:43:48 server.go:167: Primary timeout on view 15, acked view 15
+2021/06/16 08:43:48 server.go:376: server /var/tmp/824-501/pb-60069-rc-2 update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is ||
+2021/06/16 08:43:48 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is ||
+2021/06/16 08:43:48 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is ||
+2021/06/16 08:43:48 server.go:376: server /var/tmp/824-501/pb-60069-rc-1 update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is ||
+2021/06/16 08:43:48 server.go:60: Backup inited: /var/tmp/824-501/pb-60069-rc-3
+2021/06/16 08:43:48 server.go:376: server /var/tmp/824-501/pb-60069-rc-1 update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-3|
+2021/06/16 08:43:48 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:8, Value:9014268430953429432
+2021/06/16 08:43:48 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:48 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-3|
+2021/06/16 08:43:48 client.go:139: Client PutAppend rpc to /var/tmp/824-501/pb-60069-rc-1 error, Key:1000004, Value:6652131834538405682
+2021/06/16 08:43:48 client.go:140: ForwardFailed /var/tmp/824-501/pb-60069-rc-1
+2021/06/16 08:43:48 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-3|
+2021/06/16 08:43:48 server.go:233: new server start, p is /var/tmp/824-501/pb-60069-rc-1 and b is /var/tmp/824-501/pb-60069-rc-3
+2021/06/16 08:43:48 server.go:292: rpc.Register: method "CallRetry" has 6 input parameters; needs exactly three
+2021/06/16 08:43:48 server.go:292: rpc.Register: method "CheckDup" has 2 input parameters; needs exactly three
+2021/06/16 08:43:48 server.go:292: rpc.Register: method "CommitKV" has 2 input parameters; needs exactly three
+2021/06/16 08:43:48 server.go:329: rpc.Register: return type of method "Redirect" is "pbservice.Err", must be error
+2021/06/16 08:43:48 server.go:292: rpc.Register: method "SyncKVFromPrimary" has 2 input parameters; needs exactly three
+2021/06/16 08:43:48 server.go:292: rpc.Register: method "SyncReqFromPrimary" has 2 input parameters; needs exactly three
+2021/06/16 08:43:48 server.go:292: rpc.Register: method "UpdateView" has 1 input parameters; needs exactly three
+2021/06/16 08:43:48 server.go:376: server /var/tmp/824-501/pb-60069-rc-2 update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-3|
+  ... Put/Gets done ... 
+2021/06/16 08:43:49 client.go:43: New clerk init, view service: /var/tmp/824-501/pb-60069-rcv-1
+2021/06/16 08:43:49 client.go:183: client update view, now p is |/var/tmp/824-501/pb-60069-rc-1|,b is |/var/tmp/824-501/pb-60069-rc-3|
+  ... Passed
+2021/06/16 08:43:50 server.go:167: Primary timeout on view 17, acked view 17
+2021/06/16 08:43:50 server.go:179: volunteer server /var/tmp/824-501/pb-60069-rc-2 timeout, remove it
+2021/06/16 08:43:50 server.go:194: View service closed ...
+PASS
+ok  	pbservice	23.650s

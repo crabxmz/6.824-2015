@@ -1,16 +1,24 @@
 package pbservice
 
-import "viewservice"
-import "net/rpc"
-import "fmt"
-
-import "crypto/rand"
-import "math/big"
-
+import (
+	"crypto"
+	"crypto/rand"
+	"encoding/hex"
+	"errors"
+	"fmt"
+	"log"
+	"math/big"
+	"net/rpc"
+	"reflect"
+	"time"
+	"viewservice"
+)
 
 type Clerk struct {
 	vs *viewservice.Clerk
 	// Your declarations here
+	cur_view viewservice.View
+	// retry_num uint
 }
 
 // this may come in handy.
@@ -20,15 +28,22 @@ func nrand() int64 {
 	x := bigx.Int64()
 	return x
 }
-
+func Hash(objs ...interface{}) []byte {
+	digester := crypto.MD5.New()
+	for _, ob := range objs {
+		fmt.Fprint(digester, reflect.TypeOf(ob))
+		fmt.Fprint(digester, ob)
+	}
+	return digester.Sum(nil)
+}
 func MakeClerk(vshost string, me string) *Clerk {
 	ck := new(Clerk)
 	ck.vs = viewservice.MakeClerk(me, vshost)
 	// Your ck.* initializations here
-
+	log.Println("New clerk init, view service:", vshost)
+	ck.UpdateView()
 	return ck
 }
-
 
 //
 // call() sends an RPC to the rpcname handler on server srv
@@ -60,7 +75,6 @@ func call(srv string, rpcname string,
 		return true
 	}
 
-	fmt.Println(err)
 	return false
 }
 
@@ -72,10 +86,28 @@ func call(srv string, rpcname string,
 // says the key doesn't exist (has never been Put().
 //
 func (ck *Clerk) Get(key string) string {
-
-	// Your code here.
-
-	return "???"
+	args := &GetArgs{}
+	args.Key = key
+	args.Sync = false
+	args.Viewnum = ck.cur_view.Viewnum
+	ret := ""
+	for {
+		rsp := &GetReply{}
+		ok := call(ck.cur_view.Primary, "PBServer.Get", args, rsp)
+		if !ok {
+			// log.Println("Client call rpc PBServer.Get() failed ...")
+		} else if rsp.Err != "" {
+			log.Println("rpc Get return error,", rsp.Err, "Primary:", ck.cur_view.Primary)
+		} else {
+			ret = rsp.Value
+			break
+		}
+		if ck.UpdateView() != nil { //check if primary has changed
+			return ""
+		}
+		time.Sleep(viewservice.PingInterval)
+	}
+	return ret
 }
 
 //
@@ -84,6 +116,45 @@ func (ck *Clerk) Get(key string) string {
 func (ck *Clerk) PutAppend(key string, value string, op string) {
 
 	// Your code here.
+	args := &PutAppendArgs{}
+	args.Forward = true
+	args.Key = key
+	args.Value = value
+	args.Viewnum = ck.cur_view.Viewnum
+	// args.Seq = hex.EncodeToString(Hash(key, value, op, time.Now()))
+	args.Seq = hex.EncodeToString(Hash(key, value, op))
+	switch op {
+	case "Put":
+		args.Op = 0
+	case "Append":
+		args.Op = 1
+	}
+	for {
+		// log.Println(ck.cur_view.Primary, ck.cur_view.Backup)
+		rsp := &PutAppendReply{}
+		ok := call(ck.cur_view.Primary, "PBServer.PutAppend", args, rsp)
+		if !ok {
+			log.Printf("Client PutAppend rpc to %s failed, Key:%s, Value:%s\n", ck.cur_view.Primary, key, value)
+		} else if rsp.Err != "" {
+			log.Printf("Client PutAppend rpc to %s error, Key:%s, Value:%s\n", ck.cur_view.Primary, key, value)
+			log.Println(rsp.Err, ck.cur_view.Primary)
+			if rsp.Err == ForwardFailed {
+				ck.UpdateView()
+				if ck.cur_view.Backup == "" {
+					break
+				}
+			} else if rsp.Err == DuplicateRequest {
+				break
+			}
+		} else {
+			// log.Printf("Client PutAppend rpc to %s done! Key:%s, Value:%s\n", ck.cur_view.Primary, key, value)
+			break
+		}
+		if ck.UpdateView() != nil { //check if primary has changed
+			return
+		}
+		time.Sleep(viewservice.PingInterval)
+	}
 }
 
 //
@@ -100,4 +171,18 @@ func (ck *Clerk) Put(key string, value string) {
 //
 func (ck *Clerk) Append(key string, value string) {
 	ck.PutAppend(key, value, "Append")
+}
+
+func (ck *Clerk) UpdateView() error {
+	view_, ok := ck.vs.Get()
+	if !ok {
+		log.Println("Clerk: viewservice died ...")
+		return errors.New("Viewservice Failed")
+	} else {
+		if !reflect.DeepEqual(view_, ck.cur_view) {
+			log.Printf("client update view, now p is |%s|,b is |%s|\n", view_.Primary, view_.Backup)
+			ck.cur_view = view_
+		}
+	}
+	return nil
 }

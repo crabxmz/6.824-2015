@@ -1,16 +1,18 @@
 package mapreduce
 
-import "fmt"
-import "os"
-import "log"
-import "strconv"
-import "encoding/json"
-import "sort"
-import "container/list"
-import "net/rpc"
-import "net"
-import "bufio"
-import "hash/fnv"
+import (
+	"bufio"
+	"container/list"
+	"encoding/json"
+	"fmt"
+	"hash/fnv"
+	"log"
+	"net"
+	"net/rpc"
+	"os"
+	"sort"
+	"strconv"
+)
 
 // import "os/exec"
 
@@ -78,6 +80,7 @@ func InitMapReduce(nmap int, nreduce int,
 	mr.DoneChannel = make(chan bool)
 
 	// initialize any additional state here
+	mr.Workers = make(map[string]*WorkerInfo)
 	return mr
 }
 
@@ -124,7 +127,7 @@ func (mr *MapReduce) StartRegistrationServer() {
 					conn.Close()
 				}()
 			} else {
-				DPrintf("RegistrationServer: accept error", err)
+				DPrintf("RegistrationServer: accept error,%s\n", err)
 				break
 			}
 		}
@@ -359,7 +362,7 @@ func (mr *MapReduce) CleanupRegistration() {
 	args := &ShutdownArgs{}
 	var reply ShutdownReply
 	ok := call(mr.MasterAddress, "MapReduce.Shutdown", args, &reply)
-	if ok == false {
+	if !ok {
 		fmt.Printf("Cleanup: RPC %s error\n", mr.MasterAddress)
 	}
 	DPrintf("CleanupRegistration: done\n")
