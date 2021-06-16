@@ -35,10 +35,13 @@ type PBServer struct {
 
 func (pb *PBServer) Get(args *GetArgs, reply *GetReply) error {
 	// Your code here.
+	if atomic.LoadInt32(&pb.vs_avail) == 0 { //view service unreachable ...
+		return pb.handleVSFailure(args, reply)
+	}
 	reply.Err = ""
 	if args.Viewnum > pb.cur_view.Viewnum {
 		pb.mu.Lock()
-		e := pb.UpdateView()
+		e := pb.updateView()
 		pb.mu.Unlock()
 		if e != nil {
 			log.Println(e)
@@ -84,6 +87,9 @@ func (pb *PBServer) Get(args *GetArgs, reply *GetReply) error {
 
 func (pb *PBServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) error {
 	// Your code here.
+	if atomic.LoadInt32(&pb.vs_avail) == 0 { //view service unreachable ...
+		return errors.New(ViewserviceUnavail)
+	}
 	//check view update
 	pb.mu.Lock()
 	defer pb.mu.Unlock()
@@ -92,25 +98,25 @@ func (pb *PBServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) error 
 	// requests to old primary redirect to new primary
 	if pb.cur_view.Backup == pb.me { // is backup
 		if args.Forward == true { //from client
-			// e = pb.Redirect(pb.cur_view.Primary, args)
+			// e = pb.redirect(pb.cur_view.Primary, args)
 			// if e == "" { //redirect to primary, backup commit
-			// 	e = pb.CommitKV(args)
+			// 	e = pb.commitKV(args)
 			// }
 			e = ErrWrongServer
 		} else { //from primary
-			e = pb.CommitKV(args)
+			e = pb.commitKV(args)
 		}
 	} else if pb.cur_view.Primary == pb.me { // is primary
 		if args.Forward == true { //from client
 			if pb.cur_view.Backup != "" { //backup exist
-				e = pb.Redirect(pb.cur_view.Backup, args)
+				e = pb.redirect(pb.cur_view.Backup, args)
 			}
 			if e == "" || e == DuplicateRequest { //redirect to backup ok, primary commit
 				// log.Println("redirect ok")
-				e = pb.CommitKV(args)
+				e = pb.commitKV(args)
 			}
 		} else { //from backup
-			e = pb.CommitKV(args)
+			e = pb.commitKV(args)
 		}
 	} else {
 		log.Println(pb.me, "fuck, why do i get this?")
@@ -132,7 +138,7 @@ func (pb *PBServer) tick() {
 	pb.mu.Lock()
 	defer pb.mu.Unlock()
 	// log.Println(pb.me)
-	e := pb.UpdateView()
+	e := pb.updateView()
 	if e == nil {
 		v := &pb.cur_view
 		pb.vs.Ping(v.Viewnum) //suppose view service never fail
@@ -145,7 +151,7 @@ func (pb *PBServer) tick() {
 			pb.identity = VOLUNTEER
 		}
 	} else {
-		log.Println(e)
+		// log.Println(e)
 	}
 }
 
@@ -190,6 +196,7 @@ func StartServer(vshost string, me string) *PBServer {
 	v, e := pb.vs.Ping(0)
 	if e == nil {
 		ok := true
+		pb.vs_avail = 1
 		for ; ok; v, ok = pb.vs.Get() {
 			if v.Primary == me {
 				pb.identity = PRIMARY
@@ -200,11 +207,11 @@ func StartServer(vshost string, me string) *PBServer {
 			if v.Backup == me {
 				pb.identity = BACKUP
 				pb.cur_view = v
-				if !pb.SyncKVFromPrimary(v.Primary) {
-					log.Println("SyncKVFromPrimary error, Primary is", v.Primary, ", i am", pb.me)
+				if !pb.syncKVFromPrimary(v.Primary) {
+					log.Println("syncKVFromPrimary error, Primary is", v.Primary, ", i am", pb.me)
 				}
-				if !pb.SyncReqFromPrimary(v.Primary) {
-					log.Println("SyncReqFromPrimary error, Primary is", v.Primary, ", i am", pb.me)
+				if !pb.syncReqFromPrimary(v.Primary) {
+					log.Println("syncReqFromPrimary error, Primary is", v.Primary, ", i am", pb.me)
 				}
 				break
 			}
@@ -213,7 +220,6 @@ func StartServer(vshost string, me string) *PBServer {
 				pb.cur_view = v
 				break
 			}
-			pb.vs_avail = 1
 		}
 		if !ok {
 			log.Println("viewservice died ...", e)
@@ -277,15 +283,15 @@ func StartServer(vshost string, me string) *PBServer {
 	return pb
 }
 
-func (pb *PBServer) SyncKVFromPrimary(pri string) bool {
+func (pb *PBServer) syncKVFromPrimary(pri string) bool {
 	args := &GetArgs{"SyncKV", true, pb.cur_view.Viewnum}
 	rsp := &GetReply{}
 	if pri == pb.me {
 		log.Fatalln("Deadlock")
 	}
-	ok := pb.CallRetry(pb.sync_retry, pri, "PBServer.Get", args, rsp)
+	ok := pb.callretry(pb.sync_retry, pri, "PBServer.Get", args, rsp)
 	if !ok || rsp.Err != "" {
-		log.Println("SyncKVFromPrimary rpc failed, Err:", rsp.Err, ", i am:", pb.me)
+		log.Println("syncKVFromPrimary rpc failed, Err:", rsp.Err, ", i am:", pb.me)
 		return false
 	}
 	decodeBytes, err := base64.StdEncoding.DecodeString(rsp.Value)
@@ -301,15 +307,15 @@ func (pb *PBServer) SyncKVFromPrimary(pri string) bool {
 	return true
 }
 
-func (pb *PBServer) SyncReqFromPrimary(pri string) bool {
+func (pb *PBServer) syncReqFromPrimary(pri string) bool {
 	args := &GetArgs{"SyncReq", true, pb.cur_view.Viewnum}
 	rsp := &GetReply{}
 	if pri == pb.me {
 		log.Fatalln("Deadlock")
 	}
-	ok := pb.CallRetry(pb.sync_retry, pri, "PBServer.Get", args, rsp)
+	ok := pb.callretry(pb.sync_retry, pri, "PBServer.Get", args, rsp)
 	if !ok || rsp.Err != "" {
-		log.Println("SyncReqFromPrimary rpc failed, Err:", rsp.Err, ", i am:", pb.me)
+		log.Println("syncReqFromPrimary rpc failed, Err:", rsp.Err, ", i am:", pb.me)
 		return false
 	}
 	decodeBytes, err := base64.StdEncoding.DecodeString(rsp.Value)
@@ -324,7 +330,7 @@ func (pb *PBServer) SyncReqFromPrimary(pri string) bool {
 	}
 	return true
 }
-func (pb *PBServer) CallRetry(ntime uint, srv string, rpcname string, args interface{}, reply interface{}) bool {
+func (pb *PBServer) callretry(ntime uint, srv string, rpcname string, args interface{}, reply interface{}) bool {
 	for i := uint(0); i < ntime; i++ {
 		ok := call(srv, rpcname, args, reply)
 		if ok {
@@ -334,12 +340,14 @@ func (pb *PBServer) CallRetry(ntime uint, srv string, rpcname string, args inter
 	}
 	return false
 }
-func (pb *PBServer) UpdateView() error {
+func (pb *PBServer) updateView() error {
 	view_, ok := pb.vs.Get()
 	if !ok {
 		atomic.StoreInt32(&pb.vs_avail, 0)
-		log.Println("viewservice died ...")
+		// log.Println("viewservice died ...")
 		return errors.New(ViewserviceUnavail)
+	} else {
+		atomic.StoreInt32(&pb.vs_avail, 1)
 	}
 	if view_.Viewnum != pb.cur_view.Viewnum {
 		if view_.Backup == pb.me && pb.cur_view.Backup != pb.me { //i become backup
@@ -347,11 +355,11 @@ func (pb *PBServer) UpdateView() error {
 			// 	return errors.New("deadlock")
 			// }
 			pb.cur_view = view_
-			if !pb.SyncKVFromPrimary(view_.Primary) {
-				return errors.New("SyncKVFromPrimary error")
+			if !pb.syncKVFromPrimary(view_.Primary) {
+				return errors.New("syncKVFromPrimary error")
 			}
-			if !pb.SyncReqFromPrimary(view_.Primary) {
-				return errors.New("SyncReqFromPrimary error")
+			if !pb.syncReqFromPrimary(view_.Primary) {
+				return errors.New("syncReqFromPrimary error")
 			}
 		} else if view_.Primary == pb.me && pb.cur_view.Primary != pb.me { //i become primary
 			v, ok := pb.vs.Get()
@@ -371,7 +379,7 @@ func (pb *PBServer) UpdateView() error {
 	}
 	return nil
 }
-func (pb *PBServer) CheckDup(args *PutAppendArgs) Err {
+func (pb *PBServer) checkDup(args *PutAppendArgs) Err {
 	_, ok := pb.req[args.Seq]
 	if ok {
 		// log.Println(pb.me, "Dup", args.Key, pb.kvmap[args.Key])
@@ -380,8 +388,8 @@ func (pb *PBServer) CheckDup(args *PutAppendArgs) Err {
 	return ""
 }
 
-func (pb *PBServer) CommitKV(args *PutAppendArgs) Err {
-	if e := pb.CheckDup(args); e != "" {
+func (pb *PBServer) commitKV(args *PutAppendArgs) Err {
+	if e := pb.checkDup(args); e != "" {
 		return e
 	}
 	switch args.Op {
@@ -398,7 +406,7 @@ func (pb *PBServer) CommitKV(args *PutAppendArgs) Err {
 	pb.req[args.Seq] = true
 	return ""
 }
-func (pb *PBServer) Redirect(target string, args *PutAppendArgs) Err {
+func (pb *PBServer) redirect(target string, args *PutAppendArgs) Err {
 	frdArgs := *args
 	frdArgs.Viewnum = pb.cur_view.Viewnum
 	frdArgs.Forward = false
@@ -406,9 +414,49 @@ func (pb *PBServer) Redirect(target string, args *PutAppendArgs) Err {
 	if target == pb.me {
 		log.Fatalln("Deadlock")
 	}
-	_f := pb.CallRetry(pb.sync_retry, target, "PBServer.PutAppend", &frdArgs, frdRsp)
+	_f := pb.callretry(pb.sync_retry, target, "PBServer.PutAppend", &frdArgs, frdRsp)
 	if !_f {
 		return ForwardFailed
 	}
 	return frdRsp.Err
+}
+
+func (pb *PBServer) handleVSFailure(args *GetArgs, reply *GetReply) error {
+	if args.Sync == true { //if from other pb server ,do noting
+		reply.Err = ViewserviceUnavail
+		log.Println(reply.Err)
+		return nil
+	}
+	another := ""
+	if pb.cur_view.Primary != "" { //if no cache ,do noting
+		another = pb.cur_view.Primary
+	} else if pb.cur_view.Backup != "" {
+		another = pb.cur_view.Backup
+	} else {
+		reply.Err = ViewserviceUnavail
+		log.Println(reply.Err)
+		return nil
+	}
+	x := &GetViewArgs{}
+	y := &GetViewReply{}
+	ok := call(another, "PBServer.GetView", x, y)
+	if !ok { //if get view failed ,return
+		reply.Err = ViewserviceUnavail
+		log.Println(reply.Err)
+		return nil
+	}
+	pb.cur_view = y.view
+	ok = call(pb.cur_view.Primary, "PBServer.Get", args, reply)
+	if !ok {
+		reply.Err = ViewserviceUnavail
+		log.Println(reply.Err)
+		return nil
+	}
+	return nil
+}
+
+func (pb *PBServer) GetView(args *GetViewArgs, reply *GetViewReply) error {
+	reply.view = pb.cur_view
+	reply.Err = ""
+	return nil
 }

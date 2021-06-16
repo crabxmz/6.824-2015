@@ -1,5 +1,7 @@
 package pbservice
 
+import "viewservice"
+
 const (
 	OK                 = "OK"
 	ErrNoKey           = "ErrNoKey"
@@ -48,3 +50,9 @@ type GetReply struct {
 }
 
 // Your RPC definitions here.
+type GetViewArgs struct {
+}
+type GetViewReply struct {
+	view viewservice.View
+	Err  Err
+}

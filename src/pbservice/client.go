@@ -134,10 +134,10 @@ func (ck *Clerk) PutAppend(key string, value string, op string) {
 		rsp := &PutAppendReply{}
 		ok := call(ck.cur_view.Primary, "PBServer.PutAppend", args, rsp)
 		if !ok {
-			log.Printf("Client PutAppend rpc to %s failed, Key:%s, Value:%s\n", ck.cur_view.Primary, key, value)
+			// log.Printf("Client PutAppend rpc to %s failed, Key:%s, Value:%s\n", ck.cur_view.Primary, key, value)
 		} else if rsp.Err != "" {
-			log.Printf("Client PutAppend rpc to %s error, Key:%s, Value:%s\n", ck.cur_view.Primary, key, value)
-			log.Println(rsp.Err, ck.cur_view.Primary)
+			// log.Printf("Client PutAppend rpc to %s error, Key:%s, Value:%s\n", ck.cur_view.Primary, key, value)
+			// log.Println(rsp.Err, ck.cur_view.Primary)
 			if rsp.Err == ForwardFailed {
 				ck.UpdateView()
 				if ck.cur_view.Backup == "" {
